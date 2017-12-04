@@ -44,92 +44,30 @@ function setup_pad_modules_scripts() {
 	<?php
 }
 
+add_shortcode( 'tagline_slider', 'display_tagline_slider' );
 
-add_shortcode( 'tagline_slider', 'display_tagline_slider_2' );
-
-function display_tagline_slider_2() {
-
-$slides = array();
-
-  if( have_rows('slides', 'options') ) {
-
-    while ( have_rows('slides','options') ) : the_row();
-
-          // Your loop code
-          $text = get_sub_field('text');
-          array_push($slides, $text);
-
-      endwhile;
-  }
-
-
-  if ($slides) {
-
-    //$slides = array_reverse($slides);
-
-    $slide_text = "";
-
-    foreach ($slides as $slid) {
-      # code...
-      $t = ''.$slid;
-      $slide_text .= '<li>'. sanitize_text_field( $slid ).'</li>';
-
-    }
-  }
-
-
-
-  return '<div class="main flexslider">'.
-            '<ul class="slides">'.
-            ''.$slide_text . ''.
-            '</ul>'.
-          '</div>';
-
-
+function display_tagline_slider() {
+	
+	return '<div class="main flexslider">'.
+  		'<ul class="slides">'.
+  		'<li>Making money is hard enough, deposits should be EZ!</li>'.
+  		'<li>Are you one of the millions of businesses that accepts checks but still hand write your deposit slips?</li>'.
+		'</ul>'.
+	'</div>';
 }
+
 add_shortcode( 'tagline_slider_reverse', 'display_tagline_reverse_slider' );
 
-
 function display_tagline_reverse_slider() {
-
-$slides = array();
-
-  if( have_rows('slides', 'options') ) {
-
-    while ( have_rows('slides','options') ) : the_row();
-
-          // Your loop code
-          $text = get_sub_field('text');
-          array_push($slides, $text);
-
-      endwhile;
-  }
-
-
-  if ($slides) {
-
-    $slides = array_reverse($slides);
-
-    $slide_text = "";
-
-    foreach ($slides as $slid) {
-      # code...
-      $t = ''.$slid;
-      $slide_text .= '<li>'. sanitize_text_field( $slid ).'</li>';
-
-    }
-  }
-
-
-
-  return '<div class="main flexslider">'.
-            '<ul class="slides">'.
-            ''.$slide_text . ''.
-            '</ul>'.
-          '</div>';
-
-
+	
+	return '<div class="flexslider">'.
+  		'<ul class="slides">'.
+  		'<li>Are you one of the millions of businesses that accepts checks but still hand write your deposit slips?</li>'.
+  		'<li>Making money is hard enough, deposits should be EZ!</li>'.
+		'</ul>'.
+	'</div>';
 }
+
 add_shortcode( 'tagline_testimonial_slider', 'dipslay_testimoniail_tagline' );
 
 function dipslay_testimoniail_tagline() {

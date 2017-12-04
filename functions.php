@@ -92,18 +92,7 @@ add_shortcode( 'tagline_slider_reverse', 'display_tagline_reverse_slider' );
 
 function display_tagline_reverse_slider() {
 
-$slides = array();
 
-  if( have_rows('slides', 'options') ) {
-
-    while ( have_rows('slides','options') ) : the_row();
-
-          // Your loop code
-          $text = get_sub_field('text');
-          array_push($slides, $text);
-
-      endwhile;
-  }
 
 
   if ($slides) {

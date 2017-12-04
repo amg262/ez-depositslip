@@ -1,0 +1,153 @@
+/*
+Theme Name: EZ-Deposit 2016
+Template: optimizer
+Text Domain: ezdepositslip
+Author: Andrew Gunn
+Author URI: andrewgunn.xyz
+Version: 1.0.0.1449789304
+Updated: 2015-12-10 17:15:04
+*/
+
+@charset "UTF-8";
+
+.lay1 .product {
+	width: 30% !important;
+}
+
+
+body .gform_wrapper .gform_footer input[type=submit] {
+    background: #36abfc!important;
+    color: #ffffff;
+    border-color: #36abfc!important;
+    margin: 25px 25px 20px 0px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 25px;
+    border: 2px solid;
+    display: inline-block;
+    cursor:pointer;
+}
+body .gform_wrapper .gform_footer input[type=submit]:hover {
+        background: transparent!important;
+    color: #36abfc!important;
+}
+
+.single_post {
+    padding: 2.5%;
+    position: relative;
+    background: #FFF;
+    margin: 10px;
+}
+#topmenu ul li a:hover {
+	border-color: #3590ea !important;
+	color: #3590ea !important;
+}
+
+
+.overlay_off {
+    opacity: .45 !important;
+}
+.page_head, .author_div {
+    background: none !important;
+    min-height: 50px !important;
+    }
+
+    .page_head .pagetitle_wrap {
+    width: 85%;
+    margin: 30px auto 0 auto !important;
+}
+
+.page_head .postitle {
+    color: #222 !important;
+    border-bottom: 2px #666 inset;
+    margin: 10px 50px;
+    opacity: .9;
+}
+
+.resource {
+        text-align: center;
+    margin: 0 20px;
+    display: inline-block;
+    float:left;
+}
+
+.gform_wrapper .chosen-container {
+    max-width: 200px;
+}
+
+span.desc {
+    display: none !important;
+}
+
+#mobile-disclamimer {
+    display: none !important;
+}
+/*#header{ line-height:60px; margin:0 auto; width:940px; text-align:center; } */
+
+
+@media only screen {
+
+}
+
+/**
+ * Foundation: XLarge.
+ * Min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues 
+ */
+@media only screen and (max-width: 120em) {
+ 
+}
+
+/**
+ * Foundation: Large.
+ * Min-width 1025px and max-width 1440px, use when QAing large screen-only issues
+ */
+@media only screen and (max-width: 90em) { 
+  
+}
+
+/**
+ * Foundation: Medium.
+ * Min-width 641px and max-width 1024px, use when QAing tablet-only issues
+ */
+@media only screen and (max-width: 64em) {
+    
+}
+
+/**
+ * Foundation: Small.
+ * Max-width 640px, mobile-only styles, use when QAing mobile issues
+ */
+@media only screen and (max-width: 40em) {
+    #mobile-disclamimer {
+        display: block !important;
+    }
+    .static_cta1.cta_hollow_big {
+    color: #36ABFC !important;
+}
+.static_cta1.cta_hollow_big:hover {
+    color: #FFF !important;
+}
+    .main.flexslider {
+        visibility: hidden;
+    }
+}
+
+/**
+ * Foundation: XXLarge
+ * Min-width 1921px, xxlarge screens
+ */
+@media only screen and (min-width: 120.063em) {
+
+}
+
+/* Apply styles to screens in landscape orientation */
+@media only screen and (orientation: landscape) {
+
+}
+
+/* Apply styles to screens in portrait orientation */
+@media only screen and (orientation: portrait) {
+
+}
+
+

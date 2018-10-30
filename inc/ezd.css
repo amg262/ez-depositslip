@@ -75,3 +75,26 @@ body .gform_wrapper .gform_footer input[type=submit] {
 
     color: #FFF !important;
 }
+
+.tour-wrap {
+    transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
+
+}
+
+ul.tabs-shortcode-list {
+    display: inline-block !important;
+}   
+
+#screens-wrap .tabs-shortcode .ui-tabs-nav li a {
+   padding:0 !important;
+}
+
+#screens-wrap .tabs-shortcode .ui-tabs-nav li a img {
+width:100px;}
+
+img#screen200:hover, img#table200:hover {
+    opacity: .8;
+}

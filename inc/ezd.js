@@ -6,6 +6,114 @@ jQuery(document).ready(function($) {
       //$(window).load(function() {
     
       //});
+      var i, j;
+      var s, t;
+      var tab_id;
+      s = true;
+      t = true;
+      i = 0;
+      j = 0;
+      
+     
+      $('#screen200').click(function(){
+       
+          if (s == true) {
+          $('#screen200').attr('src', '/wp-content/themes/ez-depositslip/20/06/screen200.png');
+          $('#screens-wrap').css('display', 'none');
+          $('#show').html('<br>');
+          tab_id = 'ui-id-9';
+          s = false;
+
+          $('#table200').attr('src', '/wp-content/themes/ez-depositslip/inc/06/table200_h.png');
+          $('#tables-wrap').css('display', 'block');
+          $('#show-odd').text('Tables');
+          t = false;
+
+        } else {
+          $('#screen200').attr('src', '/wp-content/themes/ez-depositslip/inc/06/screen200_h.png');
+          $('#screens-wrap').css('display', 'block');
+          $('#show').text('Screens');
+          tab_id = 'ui-id-1';
+          s = true;
+
+          $('#table200').attr('src', '/wp-content/themes/ez-depositslip/inc/06/table200.png');
+          $('#tables-wrap').css('display', 'none');
+          $('#show-odd').html('<br>');
+          t = true;
+        }
+      });
+    
+
+      $('#table200').click(function(){
+        if (t == true) {
+          
+
+          $('#table200').attr('src', '/wp-content/themes/ez-depositslip/inc/06/table200_h.png');
+          $('#tables-wrap').css('display', 'block');
+          $('#show-odd').text('Tables');
+          t = false;
+          tab_id = 'ui-id-9';
+          $('#screen200').attr('src', '/wp-content/themes/ez-depositslip/inc/06/screen200.png');
+          $('#screens-wrap').css('display', 'none');
+          $('#show').html('<br>');
+          s = false;
+        } else {
+
+          $('#table200').attr('src', '/wp-content/themes/ez-depositslip/inc/06/table200.png');
+          $('#tables-wrap').css('display', 'none');
+          $('#show-odd').html('<br>');
+          t = true;
+          tab_id = 'ui-id-1';
+
+          $('#screen200').attr('src', '/wp-content/themes/ez-depositslip/inc/06/screen200_h.png');
+          $('#screens-wrap').css('display', 'block');
+          $('#show').text('Screens');
+          s = true;
+          
+        }
+      });
+
+      if (window.location.href.indexOf('#') > -1) {
+        $('#screen200').trigger('click');
+ // $("html, body").animate({ scrollTop: 0 }, "slow");
+     }
+          
+  
+      
+      /*$('#show-screens').click(function(){
+        if (i == 0) {
+           // alert('hi');
+           //$(this).attr('value', 'true');
+
+           $('#screens-wrap').css('display', 'none');
+           i++;
+
+        } else if (i > 0) {
+
+            //$(this).attr('value', 'false');
+           $('#screens-wrap').css('display', 'block');
+           i--;
+        }
+
+                //console.log('1');
+
+      });
+
+      $('#show-tables').click(function(){
+       if (j == 0) {
+           // alert('hi');
+           //$(this).attr('value', 'true');
+
+           $('#tables-wrap').css('display', 'none');
+           j++;
+
+        } else if (j > 0) {
+
+            //$(this).attr('value', 'false');
+           $('#tables-wrap').css('display', 'block');
+           j--;
+        }
+      });*/
 
       $('.midrow_block .mid_block_content .block_img img').each(function() {
         

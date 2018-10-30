@@ -1,5 +1,5 @@
 /*
-Theme Name: EZ-Deposit 2016
+Theme Name: EZ-RBRVS
 Template: optimizer
 Text Domain: ezdepositslip
 Author: Andrew Gunn
@@ -68,7 +68,7 @@ body .gform_wrapper .gform_footer input[type=submit]:hover {
         text-align: center;
     margin: 0 20px;
     display: inline-block;
-    float:left;
+	float:left;
 }
 
 .gform_wrapper .chosen-container {
@@ -78,12 +78,46 @@ body .gform_wrapper .gform_footer input[type=submit]:hover {
 span.desc {
     display: none !important;
 }
+#screen200h, #table200h, #screen200, #table200 {
 
-#mobile-disclamimer {
-    display: none !important;
+}
+#screen200:hover, #table200:hover {
+
+    opacity: .8;
+}
+.views-wrapper {
+    text-align: center;
+}
+.views-wrapper img {
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+}
+.views-wrapper p {
+    display: inline-block !important;
+}
+
+.hide, .hide-odd {
+    display: none;
+}
+
+#show, #show-odd {
+    /*display: inline;*/
+    font-weight: 700;
+    text-transform: uppercase;
+        letter-spacing: .05em;
+}
+#tables-wrap, #screens-wrap {
+    transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
 }
 /*#header{ line-height:60px; margin:0 auto; width:940px; text-align:center; } */
 
+div.single_metainfo {
+    display:none;
+}
 
 @media only screen {
 
@@ -91,18 +125,18 @@ span.desc {
 
 /**
  * Foundation: XLarge.
- * Min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues 
+ * Min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues
  */
 @media only screen and (max-width: 120em) {
- 
+
 }
 
 /**
  * Foundation: Large.
  * Min-width 1025px and max-width 1440px, use when QAing large screen-only issues
  */
-@media only screen and (max-width: 90em) { 
-  
+@media only screen and (max-width: 90em) {
+
 }
 
 /**
@@ -110,7 +144,25 @@ span.desc {
  * Min-width 641px and max-width 1024px, use when QAing tablet-only issues
  */
 @media only screen and (max-width: 64em) {
-    
+    .slides {
+        font-size:18px;
+    }
+
+    .logo img {
+        width:75%;
+    }
+    .stat_has_img .stat_content_inner,
+    .stat_content_inner {
+        padding-top: 10px !important;
+        top:10px !important;
+
+    }
+
+    .stat_content_inner .lts_button {
+        margin: 0 15px;
+        padding: 9px 25px;
+    }
+
 }
 
 /**
@@ -118,8 +170,8 @@ span.desc {
  * Max-width 640px, mobile-only styles, use when QAing mobile issues
  */
 @media only screen and (max-width: 40em) {
-    #mobile-disclamimer {
-        display: block !important;
+    .mobile-disclamimer {
+        display: block;
     }
     .static_cta1.cta_hollow_big {
     color: #36ABFC !important;
@@ -128,7 +180,11 @@ span.desc {
     color: #FFF !important;
 }
     .main.flexslider {
-        visibility: hidden;
+        visibility: visible;
+    }
+
+    .slides {
+        font-size:14px;
     }
 }
 
@@ -150,4 +206,6 @@ span.desc {
 
 }
 
-
+.updraftmessage {
+	display:none !important;
+}

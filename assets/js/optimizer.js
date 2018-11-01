@@ -125,11 +125,11 @@ jQuery(window).ready(function() {
 
     var ha = 300;
     console.log(h);
-    console.log(w);
-    console.log(ha);
+    console.log(statimgheight);
+
 
 		var hheight = jQuery(".header").height();
-		jQuery("body.home").prepend('<div class="stat_bg" style="height:'+statimgheight+'px"><img src="'+statimg+'" /></div><div class="stat_bg_overlay overlay_off" style="height:'+statimgheight+'px" />');
+		jQuery("body.home").prepend('<div class="stat_bg" style="height:'+statimgheight+'px"><img src="'+statimg+'" /></div><div class="stat_bg_overlay overlay_on" style="height:'+statimgheight+'px" />');
     //jQuery('#slidera').css({"minHeight":"initial"});
     jQuery('#slidera').css({'height': statimgheight});
 		jQuery('.home .stat_has_img .stat_bg_img').css('opacity', 0);
@@ -139,7 +139,7 @@ jQuery(window).ready(function() {
 		overlayon.waypoint({  handler: function(direction) {   jQuery('.home .stat_bg_overlay').removeClass("overlay_off").addClass("overlay_on");  },   offset: '-170px'   });
 
 		overlayoff = jQuery(".home .stat_has_img");
-		overlayoff.waypoint({  handler: function(direction) {   jQuery('.home .stat_bg_overlay').removeClass("overlay_on").addClass("overlay_off");;  },   offset: '-90px'   });
+		overlayoff.waypoint({  handler: function(direction) {   jQuery('.home .stat_bg_overlay').removeClass("overlay_on").addClass("overlay_on");;  },   offset: '-90px'   });
 
 
 	});

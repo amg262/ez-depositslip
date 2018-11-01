@@ -80,8 +80,48 @@ function display_tagline_reverse_slider() {
     '</div>';
 }*/
 
-add_shortcode( 'main_message', 'display_main_message' );
+add_shortcode( 'main_message', 'display_panes' );
+function display_main_message2() {
 
+	return 'hi';
+}
+
+/**
+ * @return string
+ */
+function display_panes() {
+
+	$slides = [];
+
+	if ( have_rows( 'panes', 'options' ) ) {
+		while ( have_rows( 'panes', 'options' ) ) :
+			the_row();
+
+			// Your loop code
+			$active     = get_sub_field( 'active' );
+
+			$text     = get_sub_field( 'text' );
+			$slides[] = $text;
+		endwhile;
+	}
+
+
+	if ( $slides ) {
+
+		$slide_text = "";
+		$i = 0;
+
+		foreach ( $slides as $slid ) {
+
+			# code...
+			$t          = '' . $slid;
+			$slide_text = '<li>' . $slid . '</li>';
+		}
+	}
+
+
+	return '<div class="main flexslider">' . '<ul class="slides">' . '' . $slide_text . '' . '</ul>' . '</div>';
+}
 /**
  * @return string
  */
@@ -96,9 +136,8 @@ function display_main_message() {
 			$active     = get_sub_field( 'active' );
 			$text       = get_sub_field( 'text' );
 			$slide_text = "";
-			$slid = "";
-			$esc = false;
-
+			$slid       = "";
+			$esc        = false;
 
 
 //			if ( $active === true && $esc === false) {
@@ -106,33 +145,26 @@ function display_main_message() {
 //				$slides[] = $text;
 //				$esc = true;
 //			}
-			if ( $active === true) {
+			if ( $active === true ) {
 				$slides[] = $text;
 
 			}
 		endwhile;
 	}
 
-	if ( $slides ) {
 
-		$slide_text = "";
+	if ( $slides !== null ) {
 
-		foreach ( $slides as $slid ) {
-			$t          = '' . $slid;
-			$slide_text .= '<li>' . $slid . '</li>';
+		foreach ( $slides as $slide ) {
+
+			$slide_text .= '<li>' . $slide . '</li>';
+
 		}
 	}
 
-	if ( get_field( 'styles', 'options' ) ) {
-		$styles = get_field( 'styles', 'options' );
-	}
+	$html = '<div class="main flexslider">' . '<ul class="slides">' . '' . $slide_text . '' . '</ul>' . '</div>';
 
-	return '<style>' . $styles . '</style>' .
-
-
-
-
-	       '<div class="main flexslider">' . '<ul class="slides">' . '' . $slide_text . '' . '</ul>' . '</div>';
+	return '';
 }
 
 

@@ -13,13 +13,16 @@
                         <a class="static_cta1 lts_button lt_rounded cta_<?php echo esc_attr( $optimizer['static_cta1_txt_style'] ); ?>"
                            href="<?php echo do_shortcode( esc_url( $optimizer['static_cta1_link'] ) ); ?>"><?php echo do_shortcode( wp_kses_post( $optimizer['static_cta1_text'] ) ); ?></a>
 					<?php } ?>
-
-					<?php echo do_shortcode( '[tagline_slider]' ); ?>
 					<?php if ( ! empty( $optimizer['static_cta2_text'] ) || is_customize_preview() ) { ?>
                         <a class="static_cta2 lts_button lt_rounded cta_<?php echo esc_attr( $optimizer['static_cta2_txt_style'] ); ?>"
                            href="<?php echo do_shortcode( esc_url( $optimizer['static_cta2_link'] ) ); ?>"><?php echo do_shortcode( wp_kses_post( $optimizer['static_cta2_text'] ) ); ?></a>
 					<?php } ?>
                 </div>
+
+
+                <style><?php echo get_field( 'pane_styles', 'options' ); ?></style>
+                <div id="tagline_slider" class="tagline_slider"><?php echo do_shortcode( '[tagline_slider]' ); ?></div>
+
             </div>
         </div>
     </div>

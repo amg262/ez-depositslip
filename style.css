@@ -10,6 +10,22 @@ Updated: 2015-12-10 17:15:04
 
 @charset "UTF-8";
 
+
+.slides {
+    font-size:25px;
+
+}
+div.stat_content_inner p {
+    margin:0;
+}
+.cta_buttons .cta_flat_big, .cta_buttons .cta_hollow_big, .cta_buttons .cta_rounded_big {
+    font-size: 14px;
+    padding: 8px 30px;
+    margin: 15px 20px;
+}
+a.hover_bucket > img {
+  width:30%;
+}
 .lay1 .product {
 	width: 30% !important;
 }
@@ -44,9 +60,9 @@ body .gform_wrapper .gform_footer input[type=submit]:hover {
 }
 
 
-.overlay_off {
-    opacity: .45 !important;
-}
+/*.overlay_off {*/
+    /*opacity: .45 !important;*/
+/*}*/
 .page_head, .author_div {
     background: none !important;
     min-height: 50px !important;
@@ -145,7 +161,7 @@ div.single_metainfo {
  */
 @media only screen and (max-width: 64em) {
     .slides {
-        font-size:18px;
+        /*font-size:22px;*/
     }
 
     .logo img {
@@ -162,7 +178,9 @@ div.single_metainfo {
         margin: 0 15px;
         padding: 9px 25px;
     }
-
+    #slidera, .slidera {
+        height:auto !important;
+    }
 }
 
 /**
@@ -185,6 +203,9 @@ div.single_metainfo {
 
     .slides {
         font-size:14px;
+    }
+    #slidera, .slidera {
+        height:auto !important;
     }
 }
 

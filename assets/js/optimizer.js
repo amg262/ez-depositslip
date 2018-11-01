@@ -103,13 +103,31 @@ jQuery(window).ready(function() {
     var h = jQuery(window).height();
     var w = jQuery(window).width();
 
-		if (statimgheight > 600) {
-      statimgheight = statimgheight - 400;
-    }
-		height = statimgheight;
 
+//    if (h > 980) {
+//      statimgheight = h * .75;
+//    } else {
+//    	statimgheight = h * .33;
+//		}
+//		if (statimgheight > 600) {
+//      statimgheight = statimgheight - 400;
+//    }
+
+		if (h > 700) {
+      statimgheight = (h * 1.1);
+    } else if ((h <700) && (h > 400)) {
+      statimgheight = (h * .333333);
+
+    } else {
+      statimgheight = (h * .4);
+
+    }
+
+    var ha = 300;
     console.log(h);
     console.log(w);
+    console.log(ha);
+
 		var hheight = jQuery(".header").height();
 		jQuery("body.home").prepend('<div class="stat_bg" style="height:'+statimgheight+'px"><img src="'+statimg+'" /></div><div class="stat_bg_overlay overlay_off" style="height:'+statimgheight+'px" />');
     //jQuery('#slidera').css({"minHeight":"initial"});

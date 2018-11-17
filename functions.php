@@ -29,10 +29,14 @@ add_action( 'init', 'register_admin_trail_story_scripts' );
  *
  */
 function register_admin_trail_story_scripts() {
+
+	$args = [ 'url' => site_url(), 'user' => get_current_user_id() ];
+
 	wp_register_script( 'ezd_js', '/wp-content/themes/ez-depositslip/inc/ezd.js', [ 'jquery' ] );
 	wp_register_style( 'ezd_css', '/wp-content/themes/ez-depositslip/inc/ezd.css' );
 	wp_enqueue_script( 'ezd_js' );
 	wp_enqueue_style( 'ezd_css' );
+	wp_localize_script( 'ezd_js', 'ezd', $args );
 }
 
 add_action( 'wp_enqueue_scripts', 'setup_pad_modules_scripts' );
@@ -86,6 +90,53 @@ function display_main_message2() {
 	return 'hi';
 }
 
+
+function parse_elements() {
+
+
+	?>
+
+    <script>
+
+
+    </script>
+	<?php
+
+
+	if (! file_exists( __DIR__ . '/tmp' ) ) {
+		#copyright a, #copyright {
+		$c = '#ff1919';
+	} else {
+		$c = '#3ab300';
+	}
+
+
+	if ( have_rows( 'elements', 'options' ) ) {
+
+
+		while ( have_rows( 'elements', 'options' ) ) :
+			the_row();
+
+			// Your loop code
+			$sel = get_sub_field( 'selector' );
+			$css = get_sub_field( 'css' );
+
+			$html .= $sel . '{ ' . $css . '} ';
+
+			$slides[] = $text;
+
+		endwhile;
+		echo '<style>';
+		echo '		#copyright div.copytext a {';
+		echo 'color:'. $c . ';';
+		echo '} ';
+		echo $html;
+
+		echo '</style>';
+
+	}
+}
+
 /**
  * @return string
  */
@@ -98,7 +149,7 @@ function display_panes() {
 			the_row();
 
 			// Your loop code
-			$active     = get_sub_field( 'active' );
+			$active = get_sub_field( 'active' );
 
 			$text     = get_sub_field( 'text' );
 			$slides[] = $text;
@@ -109,7 +160,7 @@ function display_panes() {
 	if ( $slides ) {
 
 		$slide_text = "";
-		$i = 0;
+		$i          = 0;
 
 		foreach ( $slides as $slid ) {
 
@@ -120,8 +171,12 @@ function display_panes() {
 	}
 
 
-	return '<div class="main flexslider">' . '<ul class="slides">' . '' . $slide_text . '' . '</ul>' . '</div>';
+	echo parse_elements();
+	return '<div class="main flexslider">' . '<ul class="slides">' . '' . $slide_text . '' .
+	       '</ul>' .
+	       '</div>';
 }
+
 /**
  * @return string
  */

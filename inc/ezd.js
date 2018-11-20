@@ -13,23 +13,7 @@ jQuery(document).ready(function($) {
       t = true;
       i = 0;
       j = 0;
-
-
-
-      $('#slidera div.center > div').on('click',function (event, params) {
-
-          var cs = $(this).attr('class');
-          var id = $(this).attr('id');
-
-          console.log(this);
-          console.log(cs);
-          console.log('.'+ cs.replace(' ','.'));
-          console.log(id);
-
-
-
-      });
-
+      
      
       $('#screen200').click(function(){
        

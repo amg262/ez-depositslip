@@ -1,0 +1,100 @@
+
+body .gform_wrapper .gform_footer input[type=submit] {
+        background: #36abfc!important;
+    color: #ffffff;
+    border-color: #36abfc!important;
+    margin: 25px 25px 20px 0px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 25px;
+    border: 2px solid;
+    display: inline-block;
+}
+
+#optimizer_front_blocks-1 .midrow a {
+    text-decoration: underline;
+}
+
+.test-slider {
+    text-align: center;
+    padding: 10px 7% 0 !important;
+    line-height: 1.7;
+}
+
+.test-slider h6 {
+    font-size: 22px;
+    margin: 10px 0 30px;
+}
+
+.test-slider p {
+    font-size: 18px;
+    font-weight: normal;
+    max-height: 700px;
+}
+
+.text_block_widget .flexslider {
+    height: 100%;
+    margin: 0;
+}
+
+.hover_bucket img {
+    opacity: .8;
+    -webkit-transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.hover_bucket h3 {
+    opacity: .8;
+    -webkit-transition: .2s ease-in-out;
+    -moz-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
+    transition: .2s ease-in-out;
+}
+.hover_bucket img:hover, .hover_bucket h3:hover {
+    opacity: 1;
+    -ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.2); /* Chrome, Safari, Opera */
+    transform: scale(1.2);
+}
+.hover_bucket h3:hover {
+    opacity: 1;
+    color:#0089E8 !important;
+    -ms-transform: scale(1.3); /* IE 9 */
+    -webkit-transform: scale(1.3); /* Chrome, Safari, Opera */
+    transform: scale(1.3);
+}
+
+#black-studio-tinymce-10 {
+    margin: 2% 0 1%;
+    height: 100%;
+}
+
+#topmenu ul li ul li a:hover {
+
+    color: #FFF !important;
+}
+
+.tour-wrap {
+    transition:All 1s ease;
+-webkit-transition:All 1s ease;
+-moz-transition:All 1s ease;
+-o-transition:All 1s ease;
+
+}
+
+ul.tabs-shortcode-list {
+    display: inline-block !important;
+}   
+
+#screens-wrap .tabs-shortcode .ui-tabs-nav li a {
+   padding:0 !important;
+}
+
+#screens-wrap .tabs-shortcode .ui-tabs-nav li a img {
+width:100px;}
+
+img#screen200:hover, img#table200:hover {
+    opacity: .8;
+}

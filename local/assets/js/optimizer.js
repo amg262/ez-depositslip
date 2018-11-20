@@ -98,10 +98,7 @@ jQuery(window).ready(function() {
 		var statimg = jQuery(".stat_has_img .stat_bg_img").attr('src');
 		var statimgheight = jQuery(".stat_has_img .stat_bg_img").height() + jQuery(".header").height();
 		var hheight = jQuery(".header").height();
-        var h = jQuery(window).height();
-        console.log(h);
-
-        jQuery("body.home").prepend('<div class="stat_bg" style="height:'+h+'px"><img src="'+statimg+'" /></div><div class="stat_bg_overlay overlay_off" style="height:'+h+'px" />');
+		jQuery("body.home").prepend('<div class="stat_bg" style="height:'+statimgheight+'px"><img src="'+statimg+'" /></div><div class="stat_bg_overlay overlay_off" style="height:'+statimgheight+'px" />');
 		jQuery('#slidera').css({"minHeight":"initial"});
 		jQuery('.home .stat_has_img .stat_bg_img').css('opacity', 0);
 

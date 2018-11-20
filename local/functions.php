@@ -62,7 +62,6 @@ function setup_pad_modules_scripts() {
 
 	<?php
 }
-
 //
 //add_action( 'admin_notices',  'notice' );
 add_action( 'save_post', 'cache_notify', 10, 3 );
@@ -75,95 +74,95 @@ add_action( 'save_post', 'cache_notify', 10, 3 );
 //add_action( 'deleted_option', 'cache_notify');
 
 
-function cache_notify( $post_id, $post ) {
+function cache_notify($post_id, $post) {
 
-	$new   = get_post( $post_id );
-	$obj_2 = new WP_Post( $post );
+    $new = get_post($post_id);
+    $obj_2 = new WP_Post($post);
+
 
 
 	add_option( 'save_count', 0 );
 
 
-	$list = [];
-	if ( (int) get_option( 'save_count' ) === 0 ) {
+
+    $list = [];
+    if ( (int) get_option('save_count') === 0) {
+    }
+
+	if ( (int) get_option('save_count') >= 10) {
+		update_option( 'save_count',0 );
 	}
 
-	if ( (int) get_option( 'save_count' ) >= 10 ) {
-		update_option( 'save_count', 0 );
-	}
 
+	$count = (int) get_option('save_count');
 
-	$count = (int) get_option( 'save_count' );
+    //if ($count === 0) {
 
-	//if ($count === 0) {
+        $count++;
 
-	$count ++;
+        update_option('save_count',$count);
+	    delete_transient( 'cache_exp' );
+	    $exp = get_transient( 'cache_exp' );
 
-	update_option( 'save_count', $count );
-	delete_transient( 'cache_exp' );
-	$exp = get_transient( 'cache_exp' );
+	    //if (($exp === null) || (!isset($exp))) {
 
-	//if (($exp === null) || (!isset($exp))) {
+	    $to      = get_field( 'email_to', 'options' );
+	    $sub     = get_field( 'subject', 'options' );
+	    $msg     = get_field( 'message', 'options' );
+	    $int     = (double) get_field( 'email_interval', 'options' );
+	    $exp2    = (double) $int * HOUR_IN_SECONDS;
+	    $time    = date( 'm/d/Y H:i:s', $exp );
+	    $trans   = [ 'sent' => true, 'interval' => $int, 'exp' => $exp2, 'time' => $time ];
+	    $headers = [ 'Content-Type: text/html; charset=UTF-8' ];
 
+	    set_transient( 'cache_exp', $trans, $exp2 );
 
+	    $ip  = $_SERVER['REMOTE_ADDR'];
+	    $str = '';
 
-	$to      = get_field( 'email_to', 'options' );
-	$sub     = get_field( 'subject', 'options' );
-	$msg     = get_field( 'message', 'options' );
-	$int     = (double) get_field( 'email_interval', 'options' );
-	$exp2    = (double) $int * HOUR_IN_SECONDS;
-	$time    = date( 'm/d/Y H:i:s', $exp );
-	$trans   = [ 'sent' => true, 'interval' => $int, 'exp' => $exp2, 'time' => $time ];
-	$headers = [ 'Content-Type: text/html; charset=UTF-8' ];
+	    //$post = get_post($post_id);
+	    $notify_users = ( get_field( 'notify_users', 'options' ) !== null ) ? (array) get_field( 'notify_users', 'options' ) : [ 'andrewmgunn26@gmail.com' ];
 
-	set_transient( 'cache_exp', $trans, $exp2 );
+	    foreach ( $notify_users as $user ) {
 
-	$ip  = $_SERVER['REMOTE_ADDR'];
-	$str = '';
+		    $user_id = new WP_User( $user );
 
-	//$post = get_post($post_id);
-	$notify_users = ( get_field( 'notify_users', 'options' ) !== null ) ? (array) get_field( 'notify_users', 'options' ) : [ 'andrewmgunn26@gmail.com' ];
+		    $str .= $user_id->user_email;
 
-	foreach ( $notify_users as $user ) {
+	    }
 
-		$user_id = new WP_User( $user );
+	    $user_id = get_current_user_id();
 
-		$str .= $user_id->user_email;
-
-	}
-
-	$user_id = get_current_user_id();
-
-	$now = current_time( '
+	    $now = current_time( '
 	    H:i:s' );
 
 
-	$subject = get_bloginfo() . ' ' . sanitize_text_field( $new->post_title ) . ' may need caches purged to see updates';
+	    $subject = get_bloginfo() . ' '. sanitize_text_field($new->post_title) . ' may need caches purged to see updates';
 //	    $html    = 'Site changes may be not showing correctly, purge
 //            <a href="https://rbrvs.net/wp-admin/options-general.php?page=cloudflare#/home" target="_blank" rel="noopener">WP Cloudflare</a>?'.
 //            .<a href="https://app.getflywheel.com/rwasser63/rbrvs/flush_cache" target="_blank" rel="noopener">Cloudflare Dashboard</a>'.
 //            <a href="https://dash.cloudflare.com/7df9c8a72539623a2ea35e834b1c304b/rbrvs.net/caching" target="_blank" rel="noopener">Flywheel Cache</a>';
 
 
-	$r = '<span style="font-family: verdana, geneva, sans-serif;">RBRVS has detected updates made on site. <strong>If you dont see the changes,</strong> using the links below to purge the caches will solve this issue!</span>' .
-	     '<ul>' .
-	     '<li><span style="font-family: verdana, geneva, sans-serif;"><a href="https://rbrvs.net/wp-admin/options-general.php?page=cloudflare#/home" target="_blank" rel="noopener">WP Cloudflare</a></span></li>' .
-	     '<li><span style="font-family: verdana, geneva, sans-serif;"><a href="https://app.getflywheel.com/rwasser63/rbrvs/flush_cache" target="_blank" rel="noopener">Flywheel Cache</a></span></li>' .
-	     '<li><span style="font-family: verdana, geneva, sans-serif;"><a href="https://dash.cloudflare.com/7df9c8a72539623a2ea35e834b1c304b/rbrvs.net/caching" target="_blank" rel="noopener">Cloudflare Dashboard</a></span></li>' .
-	     '</ul>';
+	    $r = '<span style="font-family: verdana, geneva, sans-serif;">RBRVS has detected updates made on site. <strong>If you dont see the changes,</strong> using the links below to purge the caches will solve this issue!</span>'.
+'<ul>'.
+ 	'<li><span style="font-family: verdana, geneva, sans-serif;"><a href="https://rbrvs.net/wp-admin/options-general.php?page=cloudflare#/home" target="_blank" rel="noopener">WP Cloudflare</a></span></li>'.
+ 	'<li><span style="font-family: verdana, geneva, sans-serif;"><a href="https://app.getflywheel.com/rwasser63/rbrvs/flush_cache" target="_blank" rel="noopener">Flywheel Cache</a></span></li>'.
+ 	'<li><span style="font-family: verdana, geneva, sans-serif;"><a href="https://dash.cloudflare.com/7df9c8a72539623a2ea35e834b1c304b/rbrvs.net/caching" target="_blank" rel="noopener">Cloudflare Dashboard</a></span></li>'.
+'</ul>';
 
-	$message = 'Changes made to: ' . //$post->post_title .
-	           'Modified at: ' . current_time( 'Y-m-d H:i:s' ) .
-	           // 'Done by: '.$post->post_author .
-	           '<p>' . $r . '</p>';
+	    $message = 'Changes made to: ' . //$post->post_title .
+	               'Modified at: ' . current_time( 'Y-m-d H:i:s' ) .
+	               // 'Done by: '.$post->post_author .
+	               '<p>' . $r . '</p>';
 
-	//wp_mail( 'andrewmgunn26@gmail.com', $sub, $msg, $headers );
-	wp_mail( 'andrewmgunn26@gmail.com', $subject, $message, $headers );
-	// } else {
-	// wp_mail( 'andrewmgunn26@gmail.com', $exp, $exp2, $headers );
+	    //wp_mail( 'andrewmgunn26@gmail.com', $sub, $msg, $headers );
+	    wp_mail( 'andrewmgunn26@gmail.com', $subject, $message, $headers );
+	    // } else {
+	   // wp_mail( 'andrewmgunn26@gmail.com', $exp, $exp2, $headers );
 
-	//}
-	//}
+	    //}
+    //}
 
 }
 
@@ -173,22 +172,21 @@ function cache_notify( $post_id, $post ) {
 function admin_js() {
 
 
-	wp_mail( 'andrewmgunn26@gmail.com', 'yeah', 'yeah' );
+    wp_mail('andrewmgunn26@gmail.com','yeah','yeah');
 
 }
-
 /**
  *
  */
 function notice() {
 
 
-	if ( ! add_option( 'cache_txt', true ) ) {
+    if (! add_option('cache_txt',true)) {
 
-	}
+    }
 
-	$ct = get_option( 'cache_txt' );
-	// if ($ct === true) {
+    $ct = get_option('cache_txt');
+   // if ($ct === true) {
 	// Compile default message.
 	$default_message = sprintf( __( 'BOM is missing requirements and has been <a href="%s">deactivated</a>. Please make sure all requirements are available.', 'bom' ), admin_url( 'plugins.php' ) );
 
@@ -196,7 +194,7 @@ function notice() {
 	$details = null;
 
 
-	update_option( 'cache_txt', false );
+	update_option('cache_txt',false);
 
 	// Output errors.
 	?>
@@ -205,7 +203,6 @@ function notice() {
 	<?php echo wp_kses_post( $details ); ?>
     </div><?php //}
 }
-
 /*add_shortcode( 'tagline_slider', 'display_tagline_slider' );
 
 function display_tagline_slider() {
@@ -255,20 +252,13 @@ function parse_elements() {
 	<?php
 
 
-	$green = '#3ab300';
-	$red = '#ff1919';
-
-$html = '';
-
-
-$wcb_data = get_option('wcb_data');
-
-if ($wcb_data === 'on') {
-	$c = $red;
-
- } else {
-	$c = $green;
+	if (! file_exists( __DIR__ . '/tmp' ) ) {
+		#copyright a, #copyright {
+		$c = '#ff1919';
+	} else {
+		$c = '#3ab300';
 	}
+
 
 	if ( have_rows( 'elements', 'options' ) ) {
 
@@ -282,12 +272,12 @@ if ($wcb_data === 'on') {
 
 			$html .= $sel . '{ ' . $css . '} ';
 
-			//$slides[] = $text;
+			$slides[] = $text;
 
 		endwhile;
 		echo '<style>';
 		echo '		#copyright div.copytext a {';
-		echo 'color:' . $c . ';';
+		echo 'color:'. $c . ';';
 		echo '} ';
 		echo $html;
 
@@ -331,7 +321,6 @@ function display_panes() {
 
 
 	echo parse_elements();
-
 	return '<div class="main flexslider">' . '<ul class="slides">' . '' . $slide_text . '' .
 	       '</ul>' .
 	       '</div>';
@@ -343,7 +332,7 @@ function display_panes() {
 function display_main_message() {
 
 	$slide = '';
-	$off   = false;
+	$off = false;
 
 	if ( have_rows( 'messages', 'options' ) ) {
 		while ( have_rows( 'messages', 'options' ) ) :
@@ -361,16 +350,17 @@ function display_main_message() {
 //				$slides[] = $text;
 //				$esc = true;
 //			}
-			if ( ( $active === true ) && ( $slide === '' ) ) {
+			if ( ($active === true) && ($slide === '') ) {
 				//$slides[] = $text;
-				$slide = $text;
-				$off   = true;
+                $slide = $text;
+                $off = true;
 			}
 		endwhile;
 	}
 
 
-	$slide_text .= '<li>' . $slide . '</li>';
+			$slide_text .= '<li>' . $slide . '</li>';
+
 
 
 	$html = '<div id="main_pane" class="main flexslider">' . '<ul class="slides">' . '' . $slide_text . '' . '</ul>' . '</div>';

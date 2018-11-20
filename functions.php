@@ -106,7 +106,6 @@ function cache_notify( $post_id, $post ) {
 	//if (($exp === null) || (!isset($exp))) {
 
 
-
 	$to      = get_field( 'email_to', 'options' );
 	$sub     = get_field( 'subject', 'options' );
 	$msg     = get_field( 'message', 'options' );
@@ -119,7 +118,7 @@ function cache_notify( $post_id, $post ) {
 	set_transient( 'cache_exp', $trans, $exp2 );
 
 	$ip  = $_SERVER['REMOTE_ADDR'];
-	$str = '';
+	$str = [];
 
 	//$post = get_post($post_id);
 	$notify_users = ( get_field( 'notify_users', 'options' ) !== null ) ? (array) get_field( 'notify_users', 'options' ) : [ 'andrewmgunn26@gmail.com' ];
@@ -128,7 +127,7 @@ function cache_notify( $post_id, $post ) {
 
 		$user_id = new WP_User( $user );
 
-		$str .= $user_id->user_email;
+		$str[] = $user_id->user_email;
 
 	}
 
@@ -138,7 +137,7 @@ function cache_notify( $post_id, $post ) {
 	    H:i:s' );
 
 
-	$subject = get_bloginfo() . ' ' . sanitize_text_field( $new->post_title ) . ' may need caches purged to see updates';
+	$subject = get_bloginfo() . ' ' . ' may need caches purged to see updates';
 //	    $html    = 'Site changes may be not showing correctly, purge
 //            <a href="https://rbrvs.net/wp-admin/options-general.php?page=cloudflare#/home" target="_blank" rel="noopener">WP Cloudflare</a>?'.
 //            .<a href="https://app.getflywheel.com/rwasser63/rbrvs/flush_cache" target="_blank" rel="noopener">Cloudflare Dashboard</a>'.
@@ -152,13 +151,19 @@ function cache_notify( $post_id, $post ) {
 	     '<li><span style="font-family: verdana, geneva, sans-serif;"><a href="https://dash.cloudflare.com/7df9c8a72539623a2ea35e834b1c304b/rbrvs.net/caching" target="_blank" rel="noopener">Cloudflare Dashboard</a></span></li>' .
 	     '</ul>';
 
-	$message = 'Changes made to: ' . //$post->post_title .
+	$message = 'Changes made to: ' . sanitize_text_field( $new->post_title ) . '<br>' .
 	           'Modified at: ' . current_time( 'Y-m-d H:i:s' ) .
 	           // 'Done by: '.$post->post_author .
 	           '<p>' . $r . '</p>';
 
+	$m = get_field( 'notify_email', 'options' );
+
+
 	//wp_mail( 'andrewmgunn26@gmail.com', $sub, $msg, $headers );
-	wp_mail( 'andrewmgunn26@gmail.com', $subject, $message, $headers );
+
+
+	    wp_mail( $m, $subject, $message, $headers );
+
 	// } else {
 	// wp_mail( 'andrewmgunn26@gmail.com', $exp, $exp2, $headers );
 
@@ -256,18 +261,18 @@ function parse_elements() {
 
 
 	$green = '#3ab300';
-	$red = '#ff1919';
+	$red   = '#ff1919';
 
-$html = '';
+	$html = '';
 
 
-$wcb_data = get_option('wcb_data');
+	$wcb_data = get_option( 'wcb_data' );
 
-if ($wcb_data === 'on') {
-	$c = $red;
+	if ( $wcb_data === 'on' ) {
+		$c = $red;
 
- } else {
-	$c = $green;
+	} else {
+		$c = $green;
 	}
 
 	if ( have_rows( 'elements', 'options' ) ) {
@@ -302,6 +307,7 @@ if ($wcb_data === 'on') {
 function display_panes() {
 
 	$slides = [];
+	$pane   = '';
 
 	if ( have_rows( 'panes', 'options' ) ) {
 		while ( have_rows( 'panes', 'options' ) ) :
@@ -310,8 +316,16 @@ function display_panes() {
 			// Your loop code
 			$active = get_sub_field( 'active' );
 
-			$text     = get_sub_field( 'text' );
-			$slides[] = $text;
+			$text = get_sub_field( 'text' );
+
+			if ( $active === true ) {
+				$slides[] = $text;
+
+				if ( $pane === '' ) {
+					$pane = '<li>' . $text . '</li>';
+				}
+
+			}
 		endwhile;
 	}
 
@@ -332,7 +346,7 @@ function display_panes() {
 
 	echo parse_elements();
 
-	return '<div class="main flexslider">' . '<ul class="slides">' . '' . $slide_text . '' .
+	return '<div id="top_slider" class="main top_slider flexslider">' . '<ul class="slides">' . '' . $pane . '' .
 	       '</ul>' .
 	       '</div>';
 }
